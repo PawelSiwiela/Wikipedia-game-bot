@@ -1,0 +1,28 @@
+# Pliki ze zmiennymi środowiskowymi
+.env
+
+# Pliki Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Środowisko wirtualne
+venv/
+env/
+ENV/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System
+.DS_Store
+Thumbs.db
