@@ -80,7 +80,7 @@ current_url = "https://pl.wikipedia.org/wiki/Special:Random"
 response = requests.get(current_url, headers={'User-Agent': 'Mozilla/5.0'}, allow_redirects=True)
 current_url = response.url  # Pobierz URL po przekierowaniu
 
-MAX_STEPS = 15  # Maksymalna liczba kroków
+MAX_STEPS = 30  # Maksymalna liczba kroków
 visited = set()  # Zbiór odwiedzonych URL (zapobiega zapętleniom)
 path = []  # Ścieżka przejścia (lista tytułów)
 
@@ -129,10 +129,18 @@ for step in range(MAX_STEPS):
         num_links = len(candidates_limited)
         
         # Zbuduj prompt dla AI
-        prompt = f"Jestem na stronie Wikipedii '{title}'. Wybierz NUMER linku (1-{num_links}), ktory najlepiej pomoze dotrzec do artykulu '{target}'.\n\nDostepne linki:\n"
+        prompt = f"""You are playing the Wikipedia Game - a popular educational puzzle where the goal is to navigate from one Wikipedia article to another by clicking links. This is a legitimate game played by millions to learn about connections between topics.
+
+Current article: '{title}'
+Target article: '{target}'
+
+Choose the NUMBER (1-{num_links}) of the link that would best help reach the target article. Consider semantic connections, geographical proximity, or categorical relationships.
+
+Available links:
+"""
         for i, (text, url) in enumerate(candidates_limited, 1):
             prompt += f"{i}. {text}\n"
-        prompt += f"\nOdpowiedz TYLKO numerem (1-{num_links}). Jezeli zaden link nie pasuje, wybierz najbardziej ogolny/geograficzny link."
+        prompt += f"\nRespond with ONLY the number (1-{num_links}). If no link seems related, choose the most general or geographical one."
         
         answer = ask_gemini(prompt)
         print("Gemini wybral:", answer)
