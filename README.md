@@ -19,8 +19,8 @@ The game involves reaching a target Wikipedia article by clicking links in succe
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/wikipedia-game-bot.git
-cd wikipedia-game-bot
+git clone https://github.com/PawelSiwiela/Wikipedia-game-bot.git
+cd Wikipedia-game-bot
 ```
 
 2. Install required packages:
